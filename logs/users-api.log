@@ -1,0 +1,4 @@
+Tue Mar 22 2022 21:47:25 GMT+0800 (Malaysia Time) | INFO | users-api.log | API: /getAllUsers | data:{"message":"API Done","total":240,"status":true} | 
+Tue Mar 22 2022 21:56:39 GMT+0800 (Malaysia Time) | INFO | users-api.log | API: /getAllUsers | data:{"message":"API Done","total":240,"status":true} | 
+Wed Mar 23 2022 11:16:45 GMT+0800 (China Standard Time) | ERROR | users-api.log | API: /loginUser | data:{"message":"API Error: Password Not Match","value":{"email":"derricktan@greatech-group.com"},"status":false} | 
+Wed Mar 23 2022 11:16:50 GMT+0800 (China Standard Time) | INFO | users-api.log | API: /loginUser | data:{"message":"API Done","main":"derricktan@greatech-group.com","status":true} | 

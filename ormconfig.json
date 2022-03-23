@@ -1,0 +1,22 @@
+[
+  {
+    "name": "standardPartsDB",
+    "type": "mysql",
+    "host": "sql503.main-hosting.eu",
+    "port": 3306,
+    "username": "u207790927_super",
+    "password": "m|0iY+P1",
+    "database": "u207790927_G_ERP",
+    "synchronize": false,
+    "logging": false,
+    "entities": ["src/entity/**/*.ts"],
+    "migrations": ["src/migration/**/*.ts"],
+    "subscribers": ["src/subscriber/**/*.ts"],
+    "cli": {
+      "entitiesDir": "src/entity",
+      "migrationsDir": "src/migration",
+      "subscribersDir": "src/subscriber"
+    }
+  }
+
+]
