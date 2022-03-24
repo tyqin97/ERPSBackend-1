@@ -743,10 +743,97 @@ UserRouter.post("/changeRole", async (req, res) => {
   }
 });
 
-UserRouter.post("/editUsers", async (req, res) => {});
+UserRouter.post("/editUsers", async (req, res) => {
+  const { id, fullname, name, email, employeeID } = req.body;
+  try {
+    const user = await UserManager.findOne(User, { id })
+
+    if (user === undefined) {
+      logger.error_obj("API: " + "/editUsers", {
+        message: "API Error: Id Not Found",
+        value: { id },
+        status: false,
+      });
+    }
+
+    await UserManager.update(User, { id }, {
+      fullname,
+      name,
+      email,
+      employeeID
+    })
+    .then((data) => {
+      logger.info_obj("API: " + "/editUsers", {
+        message: "API Done",
+        main: data,
+        status: true,
+      });
+      res.send({ data: `Edit Successfully`, main: data, status: true });
+    })
+    .catch((e) => {
+      logger.error_obj("API: " + "/editUsers", {
+        message: "API Error" + e,
+        value: { id, fullname, name, email, employeeID },
+        status: false,
+      });
+      res.send({ data: `Error On Edit To DB: ` + e, status: false });
+    })
+  }
+  catch(e) {
+    logger.error_obj("API: " + "/editUsers", {
+      message: "API Failed: " + e,
+      value: { id, fullname, name, email, employeeID },
+      status: false,
+    });
+    res.send({ message: e, status: false });
+  }
+});
 
 // Delete
-UserRouter.post("/deleteUsers", async (req, res) => {});
+UserRouter.post("/deleteUsers", async (req, res) => {
+  const { id } = req.body;
+  try {
+    const user = await UserManager.findOne(User, { id })
+
+    if (user === undefined) {
+      logger.error_obj("API: " + "/deleteUsers", {
+        message: "API Error: Id Not Found",
+        value: { id },
+        status: false,
+      });
+    }
+
+    await UserManager.update(User, { id }, 
+      {
+        status : 0
+      }
+    )
+    .then((data) => {
+      logger.info_obj("API: " + "/deleteUsers", {
+        message: "API Done",
+        main: data,
+        status: true,
+      });
+      res.send({ data: `Delete Successfully`, main: data, status: true });
+    })
+    .catch((e) => {
+      logger.error_obj("API: " + "/deleteUsers", {
+        message: "API Error" + e,
+        value: { id },
+        status: false,
+      });
+      res.send({ data: `Error On Delete To DB: ` + e, status: false });
+    })
+  }
+  catch(e) {
+    logger.error_obj("API: " + "/deleteUsers", {
+      message: "API Failed: " + e,
+      value: { id },
+      status: false,
+    });
+    res.send({ message: e, status: false });
+  }
+});
 
 // Login Function
 UserRouter.post("/loginUser", async (req, res) => {
